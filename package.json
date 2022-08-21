@@ -1,0 +1,27 @@
+{
+  "name": "succus",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1"
+  },
+  "dependencies": {
+    "@metamask/eth-sig-util": "^4.0.1",
+    "ascii85": "^1.0.2",
+    "buffer": "^6.0.3",
+    "ethereum-cryptography": "^1.1.2",
+    "ethers": "^5.7.0",
+    "events": "^3.3.0",
+    "gun": "^0.2020.1238",
+    "stream": "^0.0.2",
+    "util": "^0.12.4"
+  }
+}

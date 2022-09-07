@@ -5,8 +5,13 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "url": "https://github.com/noctisatrae/succus"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/noctisatrae/succus",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "tsc && jsdoc ./dist"
   },
   "devDependencies": {
     "typescript": "^4.6.4"

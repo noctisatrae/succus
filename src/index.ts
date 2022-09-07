@@ -7,9 +7,14 @@ const SEA = Gun.SEA;
 
 /**
  * This function is used by succus to connect to the user wallet.
- * @returns An object which contains: the address of the account, the reference to the wallet and the reference to the provider.
+ * @async
+ * @function
+ * @returns {Promise<WalletInfo>} An object which contains: the address of the account, the reference to the wallet and the reference to the provider.
+ * @example
+ * const {address, wallet, provider, gunKeypair} = connectWallet();
+ * console.log(address) // 0x...
  */
-const connectWallet = async () => {
+const connectWallet = async (): Promise<WalletInfo> => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   await provider.send("eth_requestAccounts", [])
   const signer = provider.getSigner()
@@ -20,28 +25,37 @@ const connectWallet = async () => {
   return {address: accountAddress, wallet:signer, provider: provider, gunKeypair:keypair}
 }
 
-async function encryptMessage(msg: string, encryptingKeyPair: ISEAPair) {
+async function encryptMessage(msg: string, encryptingKeyPair: ISEAPair):Promise<string> {
   const encrypted = await SEA.encrypt(msg, encryptingKeyPair);
   return encrypted;
 }
 
 /**
  * Hash a string in base64.
- * @param string 
- * @returns The string in base64 format
+ * @async
+ * @function
+ * @param {string} string The string to be converted 
+ * @returns {string} The string in base64 format
+ * @example 
+ * console.log(HashNamespace("Hello World")) // 'SGVsbG8gV29ybGQ='
  */
-function HashNamespace (string:string) {
+function HashNamespace (string:string) : string {
     return window.btoa(string);
 }
 
 /**
- * This function is used to send a message to someone or a group of persons. 
- * @param payload The message to send.
- * @param to The array containing the addresses of the persons you want to send the message to.  
- * @param provider A reference to the wallet provider. 
- * @returns If the message was sent it returns an object containing: the date when the message was sent, the encrypted message, the reference to the chat for gun, 
+ * This function is used to send a message to someone or a group of persons.
+ * @async
+ * @function 
+ * @param {string} payload The message to send.
+ * @param {string[]} to The array containing the addresses of the persons you want to send the message to.  
+ * @param {ethers.providers.Web3Provider} provider A reference to the wallet provider.
+ * @param {ISEAPair} gunKeypair The keypair used to decrypt messages. 
+ * @returns {Promise<SendMessageConfirmationReturn>}  If the message was sent it returns an object containing: the date when the message was sent, the encrypted message, the reference to the chat for gun.
+ * @example
+ * await sendmessage("Hello stranger!", [<ETH addresses here>], WalletProvider, <KeyPairForEncryption => generate it with SEA.pair()>)
  */
-const sendmessage = async (payload:string, to: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair) => {
+const sendmessage = async (payload:string, to: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
 
   const sender_address = await provider.getSigner().getAddress();
   to.push(sender_address)
@@ -56,7 +70,7 @@ const sendmessage = async (payload:string, to: string[], provider:ethers.provide
 
     return {sent: true, encrypted: encrypted_data, chat:chat}
 
-  } catch (e) {
+  } catch (e:any) {
     console.log(e)
     return {sent: false, why: e}
   }
@@ -65,11 +79,16 @@ const sendmessage = async (payload:string, to: string[], provider:ethers.provide
 
 /**
  * This function retrieves the message for a certain conversation.
+ * @async
+ * @function
  * @param from Where to get the message from...
  * @param provider A reference to the wallet provider.
- * @returns An array containing the messsages.
+ * @returns {Promise<Array<Message>>}  An array containing the messsages.
+ * @example
+ * const messages = await receiveMessage(from:[eth Addresses], <WalletProvider>, KeyPairToDecryptMSG)
+ * console.table(messages);
  */
-const receiveMessage = async (from: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair) => {
+const receiveMessage = async (from: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair): Promise<Array<Message>> => {
 
   const sender_address = await provider.getSigner().getAddress();
 
@@ -77,7 +96,7 @@ const receiveMessage = async (from: string[], provider:ethers.providers.Web3Prov
 
   const chat = gun.get(HashNamespace(from.sort().join()));
 
-  let messages:any[] = [];
+  let messages:Array<Message> = [];
   await chat?.map().on(async data => {
     const {date, from, ensFrom} = data;
 
@@ -101,5 +120,6 @@ const receiveMessage = async (from: string[], provider:ethers.providers.Web3Prov
 export {
   sendmessage,
   receiveMessage,
-  connectWallet
+  connectWallet, 
+  HashNamespace
 }

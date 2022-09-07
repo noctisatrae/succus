@@ -1,5 +1,5 @@
 [![Deploy static content to Pages](https://github.com/noctisatrae/succus/actions/workflows/pages.yml/badge.svg)](https://github.com/noctisatrae/succus/actions/workflows/pages.yml)
-![MIT License](https://img.shields.io/github/license/noctisatrae/succus)
+![Apache](https://img.shields.io/github/license/noctisatrae/succus)
 [![package](https://img.shields.io/npm/v/succus)](https://npmjs.com/package/succus)
 ![Contributors](https://img.shields.io/github/contributors/noctisatrae/succus)
 # succus - decentralized chat package.

@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/noctisatrae/succus"
   },
-  "license": "MIT",
+  "license": "Apache 2.0",
   "homepage": "https://github.com/noctisatrae/succus",
   "scripts": {
     "prepublish": "tsc && jsdoc ./dist"

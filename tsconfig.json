@@ -6,7 +6,10 @@
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
+
     "declaration": true,
+    "declarationMap": true,
+
     "outDir": "dist",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -17,9 +20,8 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "typeRoots": ["@types"]
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": [
     "node_modules",
     "dist"

@@ -55,9 +55,9 @@ function HashNamespace (string:string) : string {
  * @example
  * await sendmessage("Hello stranger!", [<ETH addresses here>], WalletProvider, <KeyPairForEncryption => generate it with SEA.pair()>)
  */
-const sendmessage = async (payload:string, to: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
+const sendmessage = async (payload:string, to: string[], provider: any, gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
 
-  const sender_address = await provider.getSigner().getAddress();
+  const sender_address = await provider.getAddress();
   to.push(sender_address)
   
   try {
@@ -88,9 +88,9 @@ const sendmessage = async (payload:string, to: string[], provider:ethers.provide
  * const messages = await receiveMessage(from:[eth Addresses], <WalletProvider>, KeyPairToDecryptMSG)
  * console.table(messages);
  */
-const receiveMessage = async (from: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair): Promise<Array<Message>> => {
+const receiveMessage = async (from: string[], provider:any, gunKeypair:ISEAPair): Promise<Array<Message>> => {
 
-  const sender_address = await provider.getSigner().getAddress();
+  const sender_address = await provider.getAddress();
 
   await from.push(sender_address);
 

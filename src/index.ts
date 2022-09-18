@@ -49,13 +49,14 @@ function HashNamespace (string:string) : string {
  * @function 
  * @param {string} payload The message to send.
  * @param {string[]} to The array containing the addresses of the persons you want to send the message to.  
- * @param {ethers.providers.Web3Provider} provider A reference to the wallet provider.
  * @param {ISEAPair} gunKeypair The keypair used to decrypt messages. 
  * @returns {Promise<SendMessageConfirmationReturn>}  If the message was sent it returns an object containing: the date when the message was sent, the encrypted message, the reference to the chat for gun.
  * @example
  * await sendmessage("Hello stranger!", [<ETH addresses here>], WalletProvider, <KeyPairForEncryption => generate it with SEA.pair()>)
  */
-const sendmessage = async (payload:string, to: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
+const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
+
+  const {provider} = await connectWallet();
 
   const sender_address = await provider.getSigner().getAddress();
   to.push(sender_address)
@@ -82,14 +83,14 @@ const sendmessage = async (payload:string, to: string[], provider:ethers.provide
  * @async
  * @function
  * @param from Where to get the message from...
- * @param provider A reference to the wallet provider.
  * @returns {Promise<Array<Message>>}  An array containing the messsages.
  * @example
  * const messages = await receiveMessage(from:[eth Addresses], <WalletProvider>, KeyPairToDecryptMSG)
  * console.table(messages);
  */
-const receiveMessage = async (from: string[], provider:ethers.providers.Web3Provider, gunKeypair:ISEAPair): Promise<Array<Message>> => {
+const receiveMessage = async (from: string[], gunKeypair:ISEAPair): Promise<Array<Message>> => {
 
+  const {provider} = await connectWallet();
   const sender_address = await provider.getSigner().getAddress();
 
   await from.push(sender_address);
@@ -117,8 +118,9 @@ const receiveMessage = async (from: string[], provider:ethers.providers.Web3Prov
   return await messages;
 }
 
-const receiveMessageConstant = async (from: string[], provider:ethers.providers.Web3Provider, callback: any) => {
+const receiveMessageConstant = async (from: string[], callback: any) => {
 
+  const {provider} = await connectWallet();
   const sender_address = await provider.getSigner().getAddress();
 
   await from.push(sender_address);

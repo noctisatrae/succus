@@ -52,7 +52,7 @@ function HashNamespace (string:string) : string {
  * @param {ISEAPair} gunKeypair The keypair used to decrypt messages. 
  * @returns {Promise<SendMessageConfirmationReturn>}  If the message was sent it returns an object containing: the date when the message was sent, the encrypted message, the reference to the chat for gun.
  * @example
- * await sendmessage("Hello stranger!", [<ETH addresses here>], WalletProvider, <KeyPairForEncryption => generate it with SEA.pair()>)
+ * await sendmessage("Hello stranger!", [<ETH addresses here>], <KeyPairForEncryption => generate it with SEA.pair()>)
  */
 const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
 
@@ -85,7 +85,7 @@ const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Pr
  * @param from Where to get the message from...
  * @returns {Promise<Array<Message>>}  An array containing the messsages.
  * @example
- * const messages = await receiveMessage(from:[eth Addresses], <WalletProvider>, KeyPairToDecryptMSG)
+ * const messages = await receiveMessage(from:[eth Addresses], KeyPairToDecryptMSG)
  * console.table(messages);
  */
 const receiveMessage = async (from: string[], gunKeypair:ISEAPair): Promise<Array<Message>> => {

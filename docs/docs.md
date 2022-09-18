@@ -59,7 +59,7 @@ This function is used to send a message to someone or a group of persons.
 
 **Example**  
 ```js
-await sendmessage("Hello stranger!", [<ETH addresses here>], WalletProvider, <KeyPairForEncryption => generate it with SEA.pair()>)
+await sendmessage("Hello stranger!", [<ETH addresses here>], <KeyPairForEncryption => generate it with SEA.pair()>)
 ```
 <a name="receiveMessage"></a>
 
@@ -75,6 +75,6 @@ This function retrieves the message for a certain conversation.
 
 **Example**  
 ```js
-const messages = await receiveMessage(from:[eth Addresses], <WalletProvider>, KeyPairToDecryptMSG)
+const messages = await receiveMessage(from:[eth Addresses], KeyPairToDecryptMSG)
 console.table(messages);
 ```

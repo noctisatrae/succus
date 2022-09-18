@@ -117,9 +117,21 @@ const receiveMessage = async (from: string[], provider:ethers.providers.Web3Prov
   return await messages;
 }
 
+const receiveMessageConstant = async (from: string[], provider:ethers.providers.Web3Provider, callback: any) => {
+
+  const sender_address = await provider.getSigner().getAddress();
+
+  await from.push(sender_address);
+
+  const chat = gun.get(HashNamespace(from.sort().join()));
+
+  return {dbStream: await chat?.map().on(callback)}
+}
+
 export {
   sendmessage,
   receiveMessage,
   connectWallet, 
-  HashNamespace
+  HashNamespace,
+  receiveMessageConstant
 }

@@ -118,6 +118,18 @@ const receiveMessage = async (from: string[], gunKeypair:ISEAPair): Promise<Arra
   return await messages;
 }
 
+/**
+ * This function retrieves the message (constant stream!!) for a certain conversation.
+ * @async
+ * @function
+ * @param from Where to get the message from...
+ * @param callback The function allowing you to retrive the message!
+ * @returns {Promise<Array<Message>>}  An array containing the messsages.
+ * @example
+ * await receiveMessageConstant([address], async (data) => {
+ *  console.log(`${data.content} at ${data.sentAt} by ${data.name}!`)
+ * })
+ */
 const receiveMessageConstant = async (from: string[], callback: any) => {
 
   const {provider} = await connectWallet();

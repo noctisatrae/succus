@@ -13,6 +13,9 @@
 <dt><a href="#receiveMessage">receiveMessage(from)</a> ⇒ <code>Promise.&lt;Array.&lt;Message&gt;&gt;</code></dt>
 <dd><p>This function retrieves the message for a certain conversation.</p>
 </dd>
+<dt><a href="#receiveMessageConstant">receiveMessageConstant(from, callback)</a> ⇒ <code>Promise.&lt;Array.&lt;Message&gt;&gt;</code></dt>
+<dd><p>This function retrieves the message (constant stream!!) for a certain conversation.</p>
+</dd>
 </dl>
 
 <a name="connectWallet"></a>
@@ -77,4 +80,23 @@ This function retrieves the message for a certain conversation.
 ```js
 const messages = await receiveMessage(from:[eth Addresses], KeyPairToDecryptMSG)
 console.table(messages);
+```
+<a name="receiveMessageConstant"></a>
+
+## receiveMessageConstant(from, callback) ⇒ <code>Promise.&lt;Array.&lt;Message&gt;&gt;</code>
+This function retrieves the message (constant stream!!) for a certain conversation.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;Message&gt;&gt;</code> - An array containing the messsages.  
+
+| Param | Description |
+| --- | --- |
+| from | Where to get the message from... |
+| callback | The function allowing you to retrive the message! |
+
+**Example**  
+```js
+await receiveMessageConstant([address], async (data) => {
+ console.log(`${data.content} at ${data.sentAt} by ${data.name}!`)
+})
 ```

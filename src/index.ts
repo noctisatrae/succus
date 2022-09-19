@@ -2,7 +2,7 @@ import { ethers } from "ethers"
 import Gun, { ISEAPair } from "gun";
 import "gun/sea";
 
-const gun = Gun({ localStorage: false, radisk:false }).get("succus").get("i fucked up");
+const gun = Gun({ localStorage: false, radisk:false });
 const SEA = Gun.SEA;
 
 /**

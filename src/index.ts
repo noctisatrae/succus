@@ -13,6 +13,12 @@ const dbConf = (conf:object) => {
   gun.opt(conf);
 }
 
+interface succusUtils {
+  provider?:ethers.providers.Web3Provider
+}
+
+const utils:succusUtils = {}
+
 /**
  * This function is used by succus to connect to the user wallet.
  * @async
@@ -22,16 +28,25 @@ const dbConf = (conf:object) => {
  * const {address, wallet, provider, gunKeypair} = connectWallet();
  * console.log(address) // 0x...
  */
-const connectWallet = async (): Promise<WalletInfo> => {
+let connectWallet = async (): Promise<WalletInfo|any> => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   await provider.send("eth_requestAccounts", [])
   const signer = provider.getSigner()
   const accountAddress = await signer.getAddress();
 
-  const keypair = await SEA.pair();
-
-  return {address: accountAddress, wallet:signer, provider: provider, gunKeypair:keypair}
+  return {address: accountAddress, wallet:signer, provider: provider}
 }
+
+const getProvider = async () => {
+  const { provider } = await connectWallet();
+
+  await (connectWallet = async () => {
+  });
+
+  await (utils.provider = provider); 
+
+  return await provider;
+} 
 
 async function encryptMessage(msg: string, encryptingKeyPair: ISEAPair):Promise<string> {
   const encrypted = await SEA.encrypt(msg, encryptingKeyPair);
@@ -145,13 +160,12 @@ const receiveMessageConstant = async (from: string[], callback: any) => {
 
   await from.push(sender_address);
 
-  const chat = gun.get(HashNamespace(from.sort().join()));
-
-  return {dbStream: await chat?.map().on(callback)}
+  await gun.get(HashNamespace(from.sort().join())).map().on(callback);
 }
 
 export {
   sendmessage,
+  getProvider,
   receiveMessage,
   connectWallet, 
   HashNamespace,

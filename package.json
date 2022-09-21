@@ -1,7 +1,6 @@
 {
   "name": "succus",
-  "version": "0.0.4-release.1.2",
-  "type": "module",
+  "version": "0.0.4-release.1.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {

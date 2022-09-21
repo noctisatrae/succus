@@ -13,7 +13,6 @@ declare global {
       address: string,
       wallet: ethers.providers.JsonRpcSigner
       provider: ethers.providers.Web3Provider
-      gunKeypair: ISEAPair
   }
   
   type SendMessageConfirmationReturn = {

@@ -14,10 +14,13 @@ const dbConf = (conf:object) => {
 }
 
 interface succusUtils {
+  executed?: boolean
   provider?:ethers.providers.Web3Provider
 }
 
-const utils:succusUtils = {}
+const utils:succusUtils = {
+  executed: false
+}
 
 /**
  * This function is used by succus to connect to the user wallet.
@@ -38,15 +41,15 @@ let connectWallet = async (): Promise<WalletInfo|any> => {
 }
 
 const getProvider = async () => {
-  if (connectWallet === (() => {})) console.log("yay");
-  const { provider } = await connectWallet();
-
-  await (connectWallet = async () => {
-  });
-
-  await (utils.provider = provider); 
-
-  return await {utils:utils, provider:provider};
+  if (!utils.executed) {
+    const { provider } = await connectWallet();
+    await (connectWallet = async () => {});
+    await (utils.executed = true);
+    await (utils.provider = provider);
+    
+    return utils.provider;
+  }
+  else return await utils.provider;
 } 
 
 async function encryptMessage(msg: string, encryptingKeyPair: ISEAPair):Promise<string> {

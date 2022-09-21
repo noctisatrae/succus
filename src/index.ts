@@ -47,7 +47,7 @@ const getProvider = async () => {
     await (utils.executed = true);
     await (utils.provider = provider);
     
-    return utils.provider;
+    return await utils.provider;
   }
   else return await utils.provider;
 } 
@@ -83,16 +83,16 @@ function HashNamespace (string:string) : string {
  */
 const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Promise<SendMessageConfirmationReturn> => {
 
-  const {provider} = await connectWallet();
+  const provider = await getProvider();
 
-  const sender_address = await provider.getSigner().getAddress();
+  const sender_address = await provider!.getSigner().getAddress();
   to.push(sender_address)
   
   try {
     const encrypted_data = await encryptMessage(payload, gunKeypair);
     const chat = gun.get(HashNamespace(await to.sort().join()));
 
-    const ensDomain = await provider.lookupAddress(sender_address)
+    const ensDomain = await provider!.lookupAddress(sender_address)
 
     await chat.set({ date: Date.now(), encryptedMSG:encrypted_data, from:sender_address, ensFrom: ensDomain })
 
@@ -117,8 +117,8 @@ const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Pr
  */
 const receiveMessage = async (from: string[], gunKeypair:ISEAPair): Promise<Array<Message>> => {
 
-  const {provider} = await connectWallet();
-  const sender_address = await provider.getSigner().getAddress();
+  const provider = await getProvider();
+  const sender_address = await provider!.getSigner().getAddress();
 
   await from.push(sender_address);
 
@@ -159,8 +159,8 @@ const receiveMessage = async (from: string[], gunKeypair:ISEAPair): Promise<Arra
  */
 const receiveMessageConstant = async (from: string[], callback: any) => {
 
-  const {provider} = await connectWallet();
-  const sender_address = await provider.getSigner().getAddress();
+  const provider = await getProvider();
+  const sender_address = await provider!.getSigner().getAddress();
 
   await from.push(sender_address);
 
@@ -171,7 +171,6 @@ export {
   sendmessage,
   getProvider,
   receiveMessage,
-  connectWallet, 
   HashNamespace,
   receiveMessageConstant,
   dbConf

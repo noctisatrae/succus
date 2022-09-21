@@ -38,6 +38,7 @@ let connectWallet = async (): Promise<WalletInfo|any> => {
 }
 
 const getProvider = async () => {
+  if (connectWallet === (() => {})) console.log("yay");
   const { provider } = await connectWallet();
 
   await (connectWallet = async () => {
@@ -45,7 +46,7 @@ const getProvider = async () => {
 
   await (utils.provider = provider); 
 
-  return await provider;
+  return await {utils:utils, provider:provider};
 } 
 
 async function encryptMessage(msg: string, encryptingKeyPair: ISEAPair):Promise<string> {

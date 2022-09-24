@@ -1,6 +1,6 @@
 import { getProvider } from "./web3";
 import { HashNamespace, registerKeypair, getKeypair } from "./utils";
-import { gun, dbConf, encryptMessage, ISEAPair } from "./db";
+import { gun, dbConf, encryptMessage, SEA, ISEAPair } from "./db";
 
 /**
  * This function is used to send a message to someone or a group of persons.
@@ -64,6 +64,8 @@ export {
   HashNamespace,
   receiveMessage,
   dbConf,
+  gun, 
+  SEA,
   registerKeypair,
   getKeypair
 }

@@ -4,8 +4,6 @@
 <dt><a href="#dbConf">dbConf(conf)</a></dt>
 <dd><p>This function is used to configure gunDB as succus is built on top of it. Learn more at <a href="https://gun.eco">https://gun.eco</a> and follow @marknadal on twitter! It&#39;s a really awesome project and if you learn use it, you can easily make succus your own.</p>
 </dd>
-<dt><a href="#getKeypair">getKeypair(of)</a> ⇒</dt>
-<dd></dd>
 <dt><a href="#HashNamespace">HashNamespace(string)</a> ⇒ <code>string</code></dt>
 <dd><p>Hash a string in base64.</p>
 </dd>
@@ -24,16 +22,6 @@ This function is used to configure gunDB as succus is built on top of it. Learn 
 | Param | Description |
 | --- | --- |
 | conf | Change the configuration of the DB by passing an object to this function containing your config: https://gun.eco/docs/API#options |
-
-<a name="getKeypair"></a>
-
-## getKeypair(of) ⇒
-**Kind**: global function  
-**Returns**: ofKeypair The keypair of the address  
-
-| Param | Description |
-| --- | --- |
-| of | For which address would you like to fetch the key. |
 
 <a name="HashNamespace"></a>
 

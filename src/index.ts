@@ -1,5 +1,5 @@
 import { getProvider } from "./web3";
-import { HashNamespace } from "./utils";
+import { HashNamespace, registerKeypair, getKeypair } from "./utils";
 import { gun, dbConf, encryptMessage, ISEAPair } from "./db";
 
 /**
@@ -63,5 +63,7 @@ export {
   getProvider,
   HashNamespace,
   receiveMessage,
-  dbConf
+  dbConf,
+  registerKeypair,
+  getKeypair
 }

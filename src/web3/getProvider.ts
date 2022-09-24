@@ -28,15 +28,16 @@ let connectWallet = async (): Promise<WalletInfo|any> => {
   }
   
 const getProvider = async () => {
-    if (!utils.executed) {
-      const { provider } = await connectWallet();
-      await (connectWallet = async () => {});
-      await (utils.executed = true);
-      await (utils.provider = provider);
-      
-      return await utils.provider;
-    }
-    else return await utils.provider;
+  
+  if (!utils.executed) {
+    const { provider } = await connectWallet();
+    await (connectWallet = async () => {});
+    await (utils.executed = true);
+    await (utils.provider = provider);
+
+    return await utils.provider;
+  }
+  else return await utils.provider;
 } 
 
 export default getProvider;

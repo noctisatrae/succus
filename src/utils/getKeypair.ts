@@ -10,7 +10,7 @@ let keypair: pubPair;
 /**
  * This function fetches the public keypair used to encrypt a message.
  * @param {string} address 
- * @returns 
+ * @returns {Promise<pubPair>} The public part of the keypair for the fetched user.
  */
 const getKeypair = async (address: string): Promise<pubPair> => {
 

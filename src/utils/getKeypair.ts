@@ -14,7 +14,7 @@ let keypair: pubPair;
  */
 const getKeypair = async (address: string): Promise<pubPair> => {
 
-    await gun.get(`skeypair${address}`).once(async data => { 
+    await gun.get(`skeypair${address}`).on(async data => { 
         await (keypair = data); 
     })
 

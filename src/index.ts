@@ -25,6 +25,7 @@ const sendmessage = async (payload:string, to: string[], gunKeypair:ISEAPair):Pr
     const chat = gun.get(HashNamespace(await to.sort().join()));
 
     const ensDomain = await provider!.lookupAddress(sender_address)
+    console.log(ensDomain);
 
     await chat.set({ date: Date.now(), encryptedMSG:encrypted_data, from:sender_address, ensFrom: ensDomain })
 

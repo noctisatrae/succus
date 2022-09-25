@@ -55,7 +55,7 @@ const receiveMessage = async (from: string[], callback: any) => {
 
   await from.push(sender_address);
 
-  await gun.get(HashNamespace(from.sort().join())).map().once(callback);
+  await gun.get(HashNamespace(from.sort().join())).map().on(callback);
 }
 
 export {

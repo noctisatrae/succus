@@ -7,4 +7,4 @@ succus is a tool allowing you to easily create **your own decentralized chat** f
 ## [Check out the docs!](https://github.com/noctisatrae/succus/blob/master/docs/docs.md)
 
 ## Improvement ideas
-- Make a config.js containing important ressources and configuration like the SEA key so you don't have to pass it everytime!
+- Make a config.js containing important ressources and configuration like the SEA key so you don't have to pass them as an argument everytime!

@@ -1,6 +1,12 @@
-import { getProvider } from "./web3/index";
-import { HashNamespace, registerKeypair, getKeypair } from "./utils/index";
-import { gun, dbConf, encryptMessage, SEA, ISEAPair } from "./db/index";
+import getProvider from "./web3/getProvider";
+import HashNamespace from "./utils/hashNamespace";
+import registerKeypair from "./utils/registerKeypair";
+import getKeypair from "./utils/getKeypair";
+//import { gun, dbConf, encryptMessage, SEA, ISEAPair } from "./db/index";
+import {gun} from "./db/index";
+import dbConf from "./db/dbConf";
+import encryptMessage from "./db/encryptMessage";
+import { SEA, ISEAPair } from "./db/index";
 
 /**
  * This function is used to send a message to someone or a group of persons.
